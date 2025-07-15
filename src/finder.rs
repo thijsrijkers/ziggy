@@ -1,8 +1,7 @@
 use std::fs;
 use std::path::Path;
 
-/// Reads and prints the contents of a `.rs` file if valid.
-pub fn read_rust_file(file_path: &str) -> Result<(), String> {
+pub fn read_rust_file(file_path: &str) -> Result<String, String> {
     let path = Path::new(file_path);
 
     if !path.is_file() {
@@ -18,8 +17,8 @@ pub fn read_rust_file(file_path: &str) -> Result<(), String> {
     let contents = fs::read_to_string(path)
         .map_err(|e| format!("Failed to read file: {}", e))?;
 
-    println!("--- File contents ---\n{}", contents);
+    // println!("--- File contents ---\n{}", contents);
 
-    Ok(())
+    Ok(contents)
 }
 

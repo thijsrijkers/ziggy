@@ -1,4 +1,6 @@
 mod finder;
+mod token;
+mod tokenizer;
 
 use std::env;
 use std::process;
@@ -13,9 +15,17 @@ fn main() {
 
     let path = &args[1];
 
-    if let Err(err) = finder::read_rust_file(path) {
-        eprintln!("{}", err);
-        process::exit(1);
+    let content_result = finder::read_rust_file(path);
+
+    match content_result {
+        Ok(content) => {
+            let tokens = tokenizer::tokenize(&content);
+            println!("{:#?}", tokens); 
+        },
+        Err(e) => {
+            eprintln!("Error reading file: {}", e);
+            process::exit(1);
+        }
     }
 }
 
