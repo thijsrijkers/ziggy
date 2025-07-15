@@ -13,7 +13,7 @@ fn main() {
 
     let path = &args[1];
 
-    if let Err(err) = finder::find_main_rs(path) {
+    if let Err(err) = finder::read_rust_file(path) {
         eprintln!("{}", err);
         process::exit(1);
     }

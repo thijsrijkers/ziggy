@@ -1,29 +1,24 @@
 use std::fs;
 use std::path::Path;
 
-pub fn find_main_rs(root: &str) -> Result<(), String> {
-    let root_path = Path::new(root);
+/// Reads and prints the contents of a `.rs` file if valid.
+pub fn read_rust_file(file_path: &str) -> Result<(), String> {
+    let path = Path::new(file_path);
 
-    if !root_path.is_dir() {
-        return Err(format!("Provided path is not a directory: {}", root));
+    if !path.is_file() {
+        return Err(format!("Provided path is not a file: {}", file_path));
     }
 
-    let src_path = root_path.join("src");
-    if !src_path.is_dir() {
-        return Err(format!("No 'src' directory found in: {}", root));
+    if path.extension().and_then(|ext| ext.to_str()) != Some("rs") {
+        return Err(format!("Provided file is not a Rust file: {}", file_path));
     }
 
-    let main_rs = src_path.join("main.rs");
-    if !main_rs.is_file() {
-        return Err(format!("No main.rs file found in: {}", src_path.display()));
-    }
+    println!("Found Rust file at: {}", path.display());
 
-    println!("Found main.rs at: {}", main_rs.display());
+    let contents = fs::read_to_string(path)
+        .map_err(|e| format!("Failed to read file: {}", e))?;
 
-    let contents = fs::read_to_string(&main_rs)
-        .map_err(|e| format!("Failed to read main.rs: {}", e))?;
-
-    println!("--- main.rs contents ---\n{}", contents);
+    println!("--- File contents ---\n{}", contents);
 
     Ok(())
 }
