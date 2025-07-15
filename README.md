@@ -1,6 +1,6 @@
 # Ziggy
 
-Ziggy is a transpiler project written in Zig that converts Rust source code into equivalent Zig code. The goal of Ziggy is to facilitate translation between these two languages, enabling interoperability and easier migration for developers working across Rust and Zig ecosystems.
+Ziggy is a transpiler project written in Rust that converts Rust source code into equivalent Zig code. The goal of Ziggy is to facilitate translation between these two languages, enabling interoperability and easier migration for developers working across Rust and Zig ecosystems.
 
 
 ## Project Structure
