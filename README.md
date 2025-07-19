@@ -18,7 +18,8 @@ The transpiler currently includes a command-line tool that tokenizes Rust source
     You can run the tokenizer directly using Cargo by passing the path to the Rust source file or project folder as an argument:
 
     ```bash
-   cargo run -- /path/to/your/rust/source.rs
+    rustc main.rs -o ziggy
+    ./ziggy  /path/to/your/rust/source.rs
     ```
 
 2. **What it does**
